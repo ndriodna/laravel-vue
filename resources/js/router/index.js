@@ -1,32 +1,33 @@
 import Vue from "vue"
 import vueRouter from "vue-router"
 
-import Edit from "../views/Edit.vue"
-import News from "../views/News.vue"
-import Tambah from "../views/Tambah.vue"
-import Update from "../views/Update.vue"
+import BeritaList from "../views/BeritaList.vue"
+import BeritaHome from "../views/BeritaHome.vue"
+import BeritaTambah from "../views/BeritaTambah.vue"
+import BeritaUpdate from "../views/BeritaUpdate.vue"
 Vue.use(vueRouter);
 
 const routes = [
 {
-	path: "/edit",
-	name: "edit",
-	component: Edit
-},
-{
 	path: "/",
-	name: "news",
-	component: News
+	name: "berita-home",
+	component: BeritaHome
 },
 {
-	path:"/tambah",
-	name:"tambah",
-	component: Tambah
+	path: "/berita/list",
+	name: "berita-list",
+	component: BeritaList
 },
 {
-	path:"/update/:id",
-	name:"update",
-	component:Update
+	path:"/berita/tambah",
+	name:"berita-tambah",
+	component: BeritaTambah
+},
+{
+	path:"/berita/update/:id",
+	name:"berita-update",
+	component:BeritaUpdate,
+	props:true
 }
 ];
 

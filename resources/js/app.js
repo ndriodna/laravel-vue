@@ -1,9 +1,9 @@
-import './bootstrap'
 import Vue from 'vue'
-import router from './router'
-
 import App from './App.vue'
-const app = new Vue({
+import router from './router'
+import store from './store'
+new Vue({
 		router,
+		store,
    render: h => h(App)
 }).$mount("#app")

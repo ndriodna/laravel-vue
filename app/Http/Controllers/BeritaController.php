@@ -13,7 +13,9 @@ class BeritaController extends Controller
      */
     public function index()
     {
-       return Berita::get();
+       $berita = Berita::all();
+       // return view('crud.index',compact('berita'));
+       return $berita;
     }
 
     /**
@@ -23,7 +25,7 @@ class BeritaController extends Controller
      */
     public function create()
     {
-        //
+        return view('crud.create');
     }
 
     /**
@@ -34,7 +36,19 @@ class BeritaController extends Controller
      */
     public function store(Request $request)
     {
-       return Berita::create($request->all());
+        $request->validate([
+            'judul'=> 'required|max:255',
+            'isi'=> 'required',
+            'penulis'=> 'required|max:255',
+        ]);
+        $berita = Berita::create([
+            'judul'     => request('judul'),
+            'isi'       => request('isi'),
+            'penulis'   => request('penulis'),
+            'tgl_terbit'=> request('tgl_terbit')
+        ]);
+       // return redirect()->route('berita.index');
+        return $berita;
     }
 
     /**
@@ -56,7 +70,9 @@ class BeritaController extends Controller
      */
     public function edit($id)
     {
-        //
+        $berita = Berita::find($id);
+        // return view('crud.edit',compact('berita'));
+        return $berita;
     }
 
     /**
@@ -68,8 +84,16 @@ class BeritaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $berita = Berita::find($id);
-        $berita->update($request->all());
+        // $berita = Berita::find($id);
+        // $berita->update($request->all());
+        // return $berita;
+        $berita = Berita::find($id)->update([
+            'judul' => request('judul'),
+            'isi' => request('isi'),
+            'penulis' => request('penulis'),
+            'tgl_terbit' => request('tgl_terbit')
+        ]);
+        // return redirect(route('berita.index'));
         return $berita;
     }
 
@@ -83,6 +107,7 @@ class BeritaController extends Controller
     {
         $berita = Berita::find($id);
         $berita->delete();
+        // return redirect(route('berita.index'));
         return 204;
     }
 }
