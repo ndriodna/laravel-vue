@@ -2027,12 +2027,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: {
-    id: Number // berita:Object
-
-  },
+  props: ["id"],
   created: function created() {
     this.fetchBerita();
   },
@@ -2146,11 +2145,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['id'],
+  props: ["id"],
   data: function data() {
-    return {
-      updates: [this.berita]
-    };
+    return {};
   },
   created: function created() {
     this.$store.dispatch('berita/showBerita', this.id);
@@ -2859,24 +2856,31 @@ var render = function() {
               ]),
               _vm._v(" "),
               _c("td", { staticClass: "border px-4 py-2" }, [
-                _vm._v(_vm._s(berita.isi.substring(0, 200)))
+                _vm._v(_vm._s(berita.isi))
               ]),
               _vm._v(" "),
               _c(
                 "td",
                 { staticClass: "border px-4 py-2 grid gap-3" },
                 [
-                  _c(
-                    "router-link",
-                    {
-                      staticClass:
-                        "bg-orange-700 rounded text-center text-white py-2 px-4 ",
-                      attrs: {
-                        to: { name: "berita-update", params: { id: berita.id } }
-                      }
-                    },
-                    [_vm._v("Update")]
-                  ),
+                  berita
+                    ? [
+                        _c(
+                          "router-link",
+                          {
+                            staticClass:
+                              "bg-orange-700 rounded text-center text-white py-2 px-4 ",
+                            attrs: {
+                              to: {
+                                name: "berita-update",
+                                params: { id: berita.id }
+                              }
+                            }
+                          },
+                          [_vm._v("Update")]
+                        )
+                      ]
+                    : _vm._e(),
                   _vm._v(" "),
                   _c(
                     "button",
@@ -2891,7 +2895,7 @@ var render = function() {
                     [_vm._v("Remove")]
                   )
                 ],
-                1
+                2
               )
             ])
           }),
@@ -19888,7 +19892,8 @@ var routes = [{
 }, {
   path: "/berita/list",
   name: "berita-list",
-  component: _views_BeritaList_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
+  component: _views_BeritaList_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
+  props: true
 }, {
   path: "/berita/tambah",
   name: "berita-tambah",
@@ -20261,15 +20266,14 @@ __webpack_require__.r(__webpack_exports__);
 /*!*********************************************!*\
   !*** ./resources/js/views/BeritaUpdate.vue ***!
   \*********************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _BeritaUpdate_vue_vue_type_template_id_e4972c22___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./BeritaUpdate.vue?vue&type=template&id=e4972c22& */ "./resources/js/views/BeritaUpdate.vue?vue&type=template&id=e4972c22&");
 /* harmony import */ var _BeritaUpdate_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./BeritaUpdate.vue?vue&type=script&lang=js& */ "./resources/js/views/BeritaUpdate.vue?vue&type=script&lang=js&");
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _BeritaUpdate_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _BeritaUpdate_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -20299,7 +20303,7 @@ component.options.__file = "resources/js/views/BeritaUpdate.vue"
 /*!**********************************************************************!*\
   !*** ./resources/js/views/BeritaUpdate.vue?vue&type=script&lang=js& ***!
   \**********************************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";

@@ -16,7 +16,8 @@ const routes = [
 {
 	path: "/berita/list",
 	name: "berita-list",
-	component: BeritaList
+	component: BeritaList,
+	props:true
 },
 {
 	path:"/berita/tambah",

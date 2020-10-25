@@ -25,10 +25,10 @@
 <script>
 	import {mapState} from 'vuex'
 	export default{
-		props:['id'],
+		props:["id"],
 			data(){
 		return{
-				updates:[this.berita]
+				
 			}
 		},
 		created(){
