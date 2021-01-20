@@ -8,8 +8,29 @@
 			<div class="text-sm lg:flex-grow">
 				<router-link class="block text-teal-100 hover:text-white mr-4 lg:inline-block" :to="{name:'berita-home'}">News</router-link>
 				<router-link class="block text-teal-100 hover:text-white mr-4 lg:inline-block" :to="{name:'berita-list'}">List</router-link>
+				<router-link class="block text-teal-100 hover:text-white mr-4 lg:inline-block float-right" :to="{name:'Login'}">Login</router-link>
+				<router-link class="block text-teal-100 hover:text-white mr-4 lg:inline-block float-right" :to="{name:'Register'}">Register</router-link>
 			</div>
+				<div>
+					<a href @click.prevent="logout">Logout</a>
+				</div>
 		</div>
 		</nav>
 	</div>
 </template>
+<script>
+	import axios from 'axios'
+	export default{
+		data(){
+			return{
+			}
+		},
+		methods:{
+			logout() {
+				localStorage.removeItem('token')
+				this.$router.push('/login')
+				this.$store.dispatch('berita/fetchBerita')
+ 		}
+		}
+	}
+</script>

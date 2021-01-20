@@ -13,8 +13,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// Route::get('/','BeritaController@index');
+// Route::resource('berita','BeritaController');
 Route::get('/{any}', function () {
     return view('vue-spa');
 })->where('any', '.*');
-// Route::get('/','BeritaController@index');
-// Route::resource('berita','BeritaController');
+
+Route::fallback(function () {
+    //
+});

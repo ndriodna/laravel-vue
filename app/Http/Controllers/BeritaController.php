@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Berita;
+use Illuminate\Support\Str;
+use Illuminate\Http\Request;
+use App\Http\Resources\BeritaResource;
+use App\Http\Resources\BeritaCollection;
+
 class BeritaController extends Controller
 {
     /**
@@ -13,9 +17,9 @@ class BeritaController extends Controller
      */
     public function index()
     {
-       $berita = Berita::all();
+       $berita = Berita::paginate(2);
        // return view('crud.index',compact('berita'));
-       return $berita;
+       return BeritaResource::collection($berita);
     }
 
     /**
@@ -37,18 +41,12 @@ class BeritaController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'judul'=> 'required|max:255',
-            'isi'=> 'required',
-            'penulis'=> 'required|max:255',
+            'title'=> 'required|min:3|max:255',
+            'body'=> 'required',
+            'subject'=> 'required',
         ]);
-        $berita = Berita::create([
-            'judul'     => request('judul'),
-            'isi'       => request('isi'),
-            'penulis'   => request('penulis'),
-            'tgl_terbit'=> request('tgl_terbit')
-        ]);
-       // return redirect()->route('berita.index');
-        return $berita;
+       $berita = auth()->user()->berita()->create($this->beritaStore());
+       return $berita;
     }
 
     /**
@@ -57,9 +55,9 @@ class BeritaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Berita $berita)
     {
-        return Berita::find($id);
+        return new BeritaResource($berita);
     }
 
     /**
@@ -84,17 +82,8 @@ class BeritaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // $berita = Berita::find($id);
-        // $berita->update($request->all());
-        // return $berita;
-        $berita = Berita::find($id)->update([
-            'judul' => request('judul'),
-            'isi' => request('isi'),
-            'penulis' => request('penulis'),
-            'tgl_terbit' => request('tgl_terbit')
-        ]);
-        // return redirect(route('berita.index'));
-        return $berita;
+       $berita->update($this->beritaStore(),$id);
+       return new BeritaResource($berita);
     }
 
     /**
@@ -103,11 +92,20 @@ class BeritaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Berita $berita)
     {
-        $berita = Berita::find($id);
         $berita->delete();
         // return redirect(route('berita.index'));
-        return 204;
+        return response()->json('delete success',200);
+    }
+
+    public function beritaStore()
+    {
+        return[
+            'title' => request('title'),
+            'slug' => Str::slug(request('title')),
+            'body' => request('body'),
+            'subject_id' => request('subject'),
+        ];
     }
 }

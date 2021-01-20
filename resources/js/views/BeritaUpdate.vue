@@ -34,14 +34,16 @@
 		created(){
 				this.$store.dispatch('berita/showBerita',this.id)
 		},
-		computed:mapState({
-			berita:state =>state.berita.berita
-		}),
+		computed:{
+		...mapState({
+			berita:state =>state.berita.berita})
+		},
 		methods:{
 			updateData(){
 				this.$store.dispatch('berita/updateBerita',this.id)
 				.then(()=>{
 					this.$router.push({name:'berita-list'})
+					this.$store.dispatch('berita/fetchBerita')
 				})
 			}
 		}

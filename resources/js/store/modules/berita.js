@@ -30,20 +30,17 @@ export const mutations = {
 
 export const actions = {
 	fetchBerita({commit}){
-		BeritaApi.getBerita()
-		.then(response=>{
-				commit('HOME_BERITA',response.data)
-			})
-		.catch(error =>{
+		BeritaApi.getBerita().then(response=>{
+				commit('HOME_BERITA',response.data.data)
+			}).catch(error =>{
 			console.log('error',error.response)
 		})
 	},
 	addBerita({commit},berita){
-		BeritaApi.tambahBerita(berita)
-		.then(response=>{
+		BeritaApi.tambahBerita(berita).then(response=>{
 			commit('ADD_BERITA',berita)
-		})
-		.catch(error =>{
+			console.log('tambah success')
+		}).catch(error =>{
 			console.log('error',error.response)
 		})
 	},
@@ -61,7 +58,7 @@ export const actions = {
 		})
 		}
 	},
-	updateBerita({commit,state},id){
+	updateBerita({commit,state,dispatch},id,berita){
 		BeritaApi.updateBerita(id,state.berita)
 		.then(response=>{
 			commit('UPDATE_BERITA',response.data)
@@ -83,7 +80,7 @@ export const actions = {
 		BeritaApi.deleteBerita(id)
 		.then(response=>{
 			if (response.status === 200) {
-				console.log('success')
+				console.log('delete success')
 			}
 			dispatch('fetchBerita')
 		})
